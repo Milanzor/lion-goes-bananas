@@ -4,14 +4,19 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 // Css plugin
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
 let publicDir = './public';
 
 module.exports = {
+
     mode: 'development',
+
     entry: {
         index: './frontend/src/index.js'
     },
-    devtool: 'inline-source-map',
+
+    devtool: 'source-map',
+
     devServer: {
         contentBase: publicDir,
         host: '0.0.0.0',
@@ -40,9 +45,10 @@ module.exports = {
 
         }
     },
+
+    // Module
     module: {
         rules: [
-            // SCSS rule
             {
                 test: /\.scss$|.css$/,
                 use: [
@@ -54,6 +60,21 @@ module.exports = {
                         loader: 'css-loader'
                     },
                     {
+                        loader: 'postcss-loader',
+                        options: {
+                            postcssOptions: {
+                                plugins: [
+                                    [
+                                        'postcss-preset-env',
+                                        {
+                                            browsers: 'last 2 versions'
+                                        }
+                                    ]
+                                ]
+                            }
+                        }
+                    },
+                    {
                         loader: 'sass-loader'
                     }
                 ]
@@ -61,6 +82,8 @@ module.exports = {
 
         ]
     },
+
+    // Cache
     cache: {
         type: 'filesystem'
     },
@@ -83,9 +106,8 @@ module.exports = {
         chunkFilename: '[name].js',
         clean: true
     },
-    resolve: {
-        extensions: ['.js', '.jsx', '.scss']
-    },
+
+    // Plugins
     plugins: [
         new MiniCssExtractPlugin({
             filename: '[name].css',
