@@ -16,8 +16,11 @@ module.exports = {
         contentBase: publicDir,
         host: '0.0.0.0',
         hot: true,
+        port: 1337,
         allowedHosts: [
-            '192.168.2.101'
+            '192.168.2.101',
+            'localhost',
+            '127.0.0.1'
         ]
     },
 

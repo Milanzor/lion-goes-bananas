@@ -1,7 +1,11 @@
 import './style/index.scss';
-const Phaser = require('phaser');
-var config = {
+
+const Phaser = require('phaser/dist/phaser-arcade-physics');
+
+const game = new Phaser.Game({
+
     type: Phaser.AUTO,
+
     width: 1200,
     height: 1200,
 
@@ -17,10 +21,8 @@ var config = {
     },
     parent: 'thicc-wack-toe',
     autoCenter: true,
-    backgroundColor: '#bada55',
-};
-
-const game = new Phaser.Game(config);
+    backgroundColor: '#bada55'
+});
 
 function preload() {
 }

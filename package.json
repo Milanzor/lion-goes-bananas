@@ -3,7 +3,12 @@
     "version": "1.0.0",
     "description": "",
     "private": true,
-    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "dev": "webpack serve",
+        "production": "webpack --mode=production --progress",
+        "serve": "serve public -S -n -l tcp://192.168.2.101:1337"
+    },
     "devDependencies": {
         "css-loader": "^6.1.0",
         "html-webpack-plugin": "^5.3.2",
@@ -11,17 +16,12 @@
         "phaser": "^3.55.2",
         "sass": "^1.35.2",
         "sass-loader": "^12.1.0",
+        "serve": "^12.0.0",
         "style-loader": "^3.1.0",
         "webpack": "^5.45.1",
         "webpack-cli": "^4.7.2",
         "webpack-dev-server": "^3.11.2"
     },
-    "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1",
-        "start": "webpack serve",
-        "build": "webpack --progress",
-        "build:production": "webpack --mode=production --progress"
-    },
-    "author": "",
-    "license": "ISC"
+    "author": "Milan van As <milanvanas@gmail.com>",
+    "license": "NOLICENSE"
 }
