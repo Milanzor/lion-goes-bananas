@@ -4,15 +4,16 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 // Css plugin
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+let publicDir = './public';
 
 module.exports = {
     mode: 'development',
     entry: {
-        index: './src/index.js'
+        index: './frontend/src/index.js'
     },
     devtool: 'inline-source-map',
     devServer: {
-        contentBase: './dist',
+        contentBase: publicDir,
         host: '0.0.0.0',
         hot: true,
         allowedHosts: [
@@ -26,19 +27,14 @@ module.exports = {
             name: 'runtime'
         },
         splitChunks: {
-            chunks: 'all',
-            name: false,
             cacheGroups: {
-                vendors: false,
-                default: false,
-                modules: {
-                    name: 'modules',
-                    chunks: 'all',
-                    minSize: 0,
-                    minChunks: 1,
-                    reuseExistingChunk: true
-                },
+                vendors: {
+                    test: /[\\/]node_modules[\\/]/,
+                    name: 'vendors',
+                    chunks: 'all'
+                }
             }
+
         }
     },
     module: {
@@ -49,16 +45,16 @@ module.exports = {
                 use: [
 
                     {
-                        loader: MiniCssExtractPlugin.loader,
+                        loader: MiniCssExtractPlugin.loader
                     },
                     {
-                        loader: 'css-loader',
+                        loader: 'css-loader'
                     },
                     {
-                        loader: 'sass-loader',
+                        loader: 'sass-loader'
                     }
                 ]
-            },
+            }
 
         ]
     },
@@ -80,7 +76,7 @@ module.exports = {
     // Output
     output: {
         filename: '[name].js',
-        path: path.resolve(__dirname, 'dist'),
+        path: path.resolve(__dirname, publicDir),
         chunkFilename: '[name].js',
         clean: true
     },
@@ -88,13 +84,13 @@ module.exports = {
         extensions: ['.js', '.jsx', '.scss']
     },
     plugins: [
-        new HtmlWebpackPlugin({
-            title: 'Development',
-            template: './src/index.html'
-        }),
         new MiniCssExtractPlugin({
             filename: '[name].css',
             chunkFilename: '[name].css'
+        }),
+        new HtmlWebpackPlugin({
+            title: 'Development',
+            template: './frontend/src/index.html'
         })
     ]
 };
