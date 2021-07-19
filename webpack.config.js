@@ -25,8 +25,7 @@ module.exports = {
         allowedHosts: [
             '192.168.2.101',
             'localhost',
-            '127.0.0.1',
-            'ashes.one'
+            '127.0.0.1'
         ]
     },
 

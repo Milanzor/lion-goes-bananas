@@ -2,15 +2,13 @@ import '../frontend/src/style/index.scss';
 
 import Phaser from 'phaser';
 
-import LobbyScene from './scenes/LobbyScene';
+import LobbyScene from './Scenes/LobbyScene';
 
 const config = {
 
     type: Phaser.AUTO,
-
-    width: 1200,
-    height: 1200,
-
+    width: window.innerWidth,
+    height: window.innerHeight,
     physics: {
         default: 'arcade',
         arcade: {
@@ -19,11 +17,10 @@ const config = {
     },
     scale: {
         mode: Phaser.Scale.FIT,
-        parent: 'phaser-example',
+        parent: 'thicc-wack-toe',
         autoCenter: Phaser.Scale.CENTER_BOTH,
     },
     scene: [LobbyScene],
-    parent: 'thicc-wack-toe',
     autoCenter: true,
     backgroundColor: '#704a00'
 };

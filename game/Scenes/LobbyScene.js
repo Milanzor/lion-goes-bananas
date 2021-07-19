@@ -1,6 +1,9 @@
 import Phaser from 'phaser';
 
 import lion from '../assets/lion.png';
+import banana from '../assets/banana.png';
+
+import Player from '../Objects/Player';
 
 export default class LobbyScene extends Phaser.Scene {
 
@@ -10,22 +13,25 @@ export default class LobbyScene extends Phaser.Scene {
 
     preload() {
         this.load.image(lion, lion);
+        this.load.image(banana, banana);
     }
 
     create() {
 
-        this.player = this._createPlayer();
+        this.player = new Player(this);
 
         this.cursors = this.input.keyboard.createCursorKeys();
         this.physics.world.setFPS(144);
     }
 
     update() {
-        
+
         if (this.cursors.left.isDown) {
             this.player.setVelocityX(-2000);
+            this.player.setFlipX(false);
         } else if (this.cursors.right.isDown) {
             this.player.setVelocityX(2000);
+            this.player.setFlipX(true);
         } else {
             this.player.setVelocityX(0);
         }
@@ -33,19 +39,6 @@ export default class LobbyScene extends Phaser.Scene {
         if (this.cursors.up.isDown && this.player.body.velocity.y === 0) {
             this.player.setVelocityY(-2500);
         }
-    }
-
-    _createPlayer() {
-
-        const player = this.physics.add.sprite(this.sys.game.canvas.width / 2, this.sys.game.canvas.height, lion);
-
-        player.setBounce(0);
-        player.setCollideWorldBounds(true);
-        player.isOnWorldBounds = true;
-
-        player.setGravityY(10000);
-
-        return player;
     }
 
 }
