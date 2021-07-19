@@ -12,7 +12,7 @@ module.exports = {
     mode: 'development',
 
     entry: {
-        index: './frontend/src/index.js'
+        index: './game/index.js'
     },
 
     devtool: 'source-map',
@@ -25,7 +25,8 @@ module.exports = {
         allowedHosts: [
             '192.168.2.101',
             'localhost',
-            '127.0.0.1'
+            '127.0.0.1',
+            'ashes.one'
         ]
     },
 
@@ -78,6 +79,18 @@ module.exports = {
                         loader: 'sass-loader'
                     }
                 ]
+            },
+
+            // Font and img rules
+            {
+                test: /\.(eot|svg|ttf|woff|woff2|jpg|jpeg|png|gif)$/,
+                use: {
+                    loader: 'file-loader',
+                    options: {
+                        publicPath: '/',
+                        name: '[name].[ext]'
+                    }
+                }
             }
 
         ]
