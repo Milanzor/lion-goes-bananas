@@ -3,11 +3,15 @@ import Phaser from 'phaser';
 import lion from '../assets/lion.png';
 import banana from '../assets/banana.png';
 import bg from '../assets/bg.jpg';
+import meat from '../assets/meat.png';
+import lionAteMeat from '../assets/lion_ate_meat.png';
 
 import Player from '../Objects/Player';
 import Banana from '../Objects/Banana';
+import Meat from '../Objects/Meat';
 import pop from '../assets/audio/pop.mp3';
 import jump from '../assets/audio/jump.mp3';
+import roar from '../assets/audio/roar.mp3';
 
 export default class MainScene extends Phaser.Scene {
 
@@ -16,11 +20,16 @@ export default class MainScene extends Phaser.Scene {
     }
 
     preload() {
+
         this.load.image(bg, bg);
         this.load.image(lion, lion);
         this.load.image(banana, banana);
+        this.load.image(meat, meat);
+        this.load.image(lionAteMeat, lionAteMeat);
+
         this.load.audio(pop, pop);
         this.load.audio(jump, jump);
+        this.load.audio(roar, roar);
     }
 
     create() {
@@ -46,8 +55,14 @@ export default class MainScene extends Phaser.Scene {
         // Setup bananas
         this.bananas = this.physics.add.group();
 
+        // Setup meats
+        this.meats = this.physics.add.group();
+
         // Make bananas collide
-        this.physics.add.collider(this.bananas, this.player, this.loadScoreScene, null, this);
+        this.physics.add.collider(this.bananas, this.player.getSprite(), this.loadScoreScene, null, this);
+
+        // Make meat collide
+        this.physics.add.collider(this.meats, this.player.getSprite(), this.powerUpMeat, null, this);
 
         // Spawn bananas every 300ms
         this.time.addEvent({
@@ -57,10 +72,19 @@ export default class MainScene extends Phaser.Scene {
             repeat: Infinity
         });
 
+        // Spawn meat every 10s
+        this.time.addEvent({
+            delay: 10000,
+            callback: this._spawnMeat,
+            callbackScope: this,
+            repeat: Infinity
+        });
+
         this.playerSpeed = 1000;
         this.playerJump = 3500;
         this.pop = this.sound.add(pop, {loop: false});
         this.jump = this.sound.add(jump, {loop: false});
+        this.roar = this.sound.add(roar, {loop: false});
     }
 
     _spawnBanana() {
@@ -70,26 +94,34 @@ export default class MainScene extends Phaser.Scene {
         this.pop.play();
     }
 
+    _spawnMeat() {
+        this.meats.add(new Meat(this));
+    }
+
     update() {
 
         if (this.cursors.left.isDown) {
-            this.player.setVelocityX(this.playerSpeed * -1);
-            this.player.setFlipX(false);
+            this.player.moveLeft();
         } else if (this.cursors.right.isDown) {
-            this.player.setVelocityX(this.playerSpeed);
-            this.player.setFlipX(true);
+            this.player.moveRight();
         } else {
-            this.player.setVelocityX(0);
+            this.player.stationary();
         }
 
-        if (this.cursors.up.isDown && this.player.body.velocity.y === 0) {
-            this.player.setVelocityY(this.playerJump*-1);
-            this.jump.play();
+        if (this.cursors.up.isDown && this.player.isNotJumpingOrFalling()) {
+            this.player.jump();
         }
     }
 
     loadScoreScene() {
-        this.scene.start('score-scene', {score: this.score});
+        if (!this.player.isPoweredUpByMeat()) {
+            this.scene.start('score-scene', {score: this.score});
+        }
+    }
+
+    powerUpMeat(player, meat) {
+        this.player.powerUpMeat();
+        meat.destroy();
     }
 
 }
