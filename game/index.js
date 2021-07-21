@@ -2,7 +2,8 @@ import '../frontend/src/style/index.scss';
 
 import Phaser from 'phaser';
 
-import LobbyScene from './Scenes/LobbyScene';
+import MainScene from './Scenes/MainScene';
+import ScoreScene from './Scenes/ScoreScene';
 
 const config = {
 
@@ -20,9 +21,9 @@ const config = {
         parent: 'thicc-wack-toe',
         autoCenter: Phaser.Scale.CENTER_BOTH,
     },
-    scene: [LobbyScene],
+    scene: [MainScene, ScoreScene],
     autoCenter: true,
-    backgroundColor: '#704a00'
+    backgroundColor: '#C9E9F6'
 };
 
 export default new Phaser.Game(config);

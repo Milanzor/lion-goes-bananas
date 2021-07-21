@@ -22,11 +22,7 @@ module.exports = {
         host: '0.0.0.0',
         hot: true,
         port: 1337,
-        allowedHosts: [
-            '192.168.2.101',
-            'localhost',
-            '127.0.0.1'
-        ]
+        allowedHosts: ['192.168.2.101', 'thicc-wack-toe.roach.one'],
     },
 
     // Optimization
@@ -82,7 +78,7 @@ module.exports = {
 
             // Font and img rules
             {
-                test: /\.(eot|svg|ttf|woff|woff2|jpg|jpeg|png|gif)$/,
+                test: /\.(eot|svg|ttf|woff|woff2|jpg|jpeg|png|gif|mp3|wav)$/,
                 use: {
                     loader: 'file-loader',
                     options: {
