@@ -2,6 +2,7 @@ import '../frontend/src/style/index.scss';
 
 import Phaser from 'phaser';
 
+import LaunchScene from './Scenes/LaunchScene';
 import MainScene from './Scenes/MainScene';
 import ScoreScene from './Scenes/ScoreScene';
 
@@ -18,10 +19,9 @@ const config = {
     },
     scale: {
         mode: Phaser.Scale.FIT,
-        parent: 'thicc-wack-toe',
         autoCenter: Phaser.Scale.CENTER_BOTH,
     },
-    scene: [MainScene, ScoreScene],
+    scene: [LaunchScene, MainScene, ScoreScene],
     autoCenter: true,
     backgroundColor: '#C9E9F6'
 };

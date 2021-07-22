@@ -1,6 +1,10 @@
 const path = require('path');
 
+// Html plugin
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+
+// Favicons plugin
+const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 
 // Css plugin
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
@@ -22,7 +26,7 @@ module.exports = {
         host: '0.0.0.0',
         hot: true,
         port: 1337,
-        allowedHosts: ['192.168.2.101', 'thicc-wack-toe.roach.one'],
+        allowedHosts: ['192.168.2.101', 'lion-goes-bananas.roach.one', 'localhost', '127.0.0.1']
     },
 
     // Optimization
@@ -121,6 +125,7 @@ module.exports = {
             filename: '[name].css',
             chunkFilename: '[name].css'
         }),
+        new FaviconsWebpackPlugin('./frontend/src/favicon.png'),
         new HtmlWebpackPlugin({
             title: 'Development',
             template: './frontend/src/index.html'

@@ -2,11 +2,12 @@ import Phaser from 'phaser';
 
 import bg from '../assets/bg.jpg';
 import gameover from '../assets/audio/gameover.mp3';
+import monkeyLaugh from '../assets/audio/monkey-laugh.mp3';
 
 export default class ScoreScene extends Phaser.Scene {
 
     constructor() {
-        super('score-scene');
+        super('score');
     }
 
     preload() {
@@ -37,12 +38,16 @@ export default class ScoreScene extends Phaser.Scene {
         continueText.setPosition(this.sys.canvas.width / 2, (this.sys.canvas.height / 2) + 70);
         continueText.setOrigin(0.5);
 
-        this.input.keyboard.on('keydown-' + 'SPACE', function() {
-            this.scene.start('main-scene');
+        this.input.keyboard.on('keydown-SPACE', function() {
+            this.scene.start('main');
         }, this);
 
+        this.game.sound.stopAll();
+
         let gameoverSound = this.sound.add(gameover, {loop: false});
+        let monkeyLaughSound = this.sound.add(monkeyLaugh, {loop: false});
         gameoverSound.play();
+        monkeyLaughSound.play();
 
     }
 

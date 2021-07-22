@@ -25,8 +25,7 @@ export default class Player {
         this._ateMeat = false;
         this._playerSprite.setGravityY(5000);
 
-        this.movementSpeed = 1000;
-        this.jumpSpeed = 2000;
+        this.setSpeedWalk();
 
         this._playerSprite.setScale(1);
         this._playerSprite.setTexture(lion);
@@ -58,6 +57,16 @@ export default class Player {
 
     getSprite() {
         return this._playerSprite;
+    }
+
+    setSpeedWalk() {
+        this.movementSpeed = 1000;
+        this.jumpSpeed = 2000;
+    }
+
+    setSpeedSprint() {
+        this.movementSpeed = 1500;
+        this.jumpSpeed = 3000;
     }
 
     powerUpMeat() {
