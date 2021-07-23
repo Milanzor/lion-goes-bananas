@@ -26,13 +26,13 @@ export default class ScoreScene extends Phaser.Scene {
         this.bg.displayWidth = this.sys.canvas.width;
         this.bg.displayHeight = this.sys.canvas.height;
 
-        let scoreText = this.add.text(0, 0, `Final score: ${this.score}`, {fontSize: '92px', fontStyle: 'bold', fill: 'white'});
+        let scoreText = this.add.text(0, 0, `Final score: ${this.score}`, {fontSize: '92px', fontFamily: 'Arial', fontStyle: 'bold', fill: 'white'});
         scoreText.setShadow(3, 3, 'rgba(0,0,0,0.8)', 2);
 
         scoreText.setPosition(this.sys.canvas.width / 2, this.sys.canvas.height / 2);
         scoreText.setOrigin(0.5);
 
-        let continueText = this.add.text(0, 0, `Press Space to restart`, {fontSize: '42px', fontStyle: 'bold', fill: 'white'});
+        let continueText = this.add.text(0, 0, `Press Space to restart`, {fontSize: '42px', fontFamily: 'Arial', fontStyle: 'bold', fill: 'white'});
         continueText.setShadow(2, 2, 'rgba(0,0,0,0.8)', 2);
 
         continueText.setPosition(this.sys.canvas.width / 2, (this.sys.canvas.height / 2) + 70);

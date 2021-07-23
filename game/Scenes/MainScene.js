@@ -63,6 +63,7 @@ export default class MainScene extends Phaser.Scene {
      *
      */
     create() {
+        this.game.sound.stopAll();
 
         this.bg = this.add.image(0, 0, bg);
         this.bg.setOrigin(0, 0);
@@ -75,7 +76,7 @@ export default class MainScene extends Phaser.Scene {
         this.physics.world.setFPS(144);
 
         // Setup score
-        this.scoreText = this.add.text(16, 16, 'Score: 0', {fontSize: '62px', fontStyle: 'bold', fill: 'white'});
+        this.scoreText = this.add.text(16, 16, 'Score: 0', {fontSize: '62px', fontFamily: 'Arial', fontStyle: 'bold', fill: 'white'});
         this.scoreText.setShadow(3, 3, 'rgba(0,0,0,0.8)', 2);
 
         this.score = 0;
