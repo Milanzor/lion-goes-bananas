@@ -76,8 +76,10 @@ export default class MainScene extends Phaser.Scene {
         this.physics.world.setFPS(144);
 
         // Setup score
-        this.scoreText = this.add.text(16, 16, 'Score: 0', {fontSize: '62px', fontFamily: 'Arial', fontStyle: 'bold', fill: 'white'});
-        this.scoreText.setShadow(3, 3, 'rgba(0,0,0,0.8)', 2);
+        this.scoreText = this.add.text(16, 16, 'Score: 0', {fontSize: '52px', fontFamily: 'Arial', fontStyle: 'bold', fill: 'white'});
+
+        this.scoreText.setShadow(5, 5, 'rgba(0,0,0,1)', 2);
+        this.scoreText.setResolution(2);
 
         this.score = 0;
 

@@ -20,7 +20,7 @@ export default class LaunchScene extends Phaser.Scene {
 
     create() {
 
-        this.sound.add(jungleDrumMusic, {loop: true}).play();
+        // this.sound.add(jungleDrumMusic, {loop: true}).play();
 
         let bgGradient = this.add.graphics();
 
@@ -38,11 +38,45 @@ export default class LaunchScene extends Phaser.Scene {
             duration: 5600,
             repeat: -1,
             rotation: 3,
-            yoyo: true,
+            yoyo: true
         });
 
-        let logoImage = this.add.image(this.sys.canvas.width / 2, (this.sys.canvas.height / 2) + 70, logo);
-        logoImage.setScale(0.8);
+        this._logo();
+        this._spaceToStartText();
+
+        this.input.keyboard.on('keydown-SPACE', function() {
+            this.scene.start('main');
+        }, this);
+
+    }
+
+    _spaceToStartText() {
+
+        let spaceToStartText = this.add.text(0, 0, `Press Space to start`, {fontSize: '42px', fontFamily: 'Arial', fontStyle: 'bold', fill: 'white'});
+
+        spaceToStartText.setPosition(this.sys.canvas.width / 2, (this.sys.canvas.height / 2) + 350);
+        spaceToStartText.setOrigin(0.5);
+
+        spaceToStartText.setShadow(7, 7, 'rgba(0,0,0,1)', 2);
+        spaceToStartText.setResolution(2);
+        spaceToStartText.setAlpha(0);
+
+        this.tweens.add({
+            targets: spaceToStartText,
+            ease: 'Quad.easeInOut',
+            duration: 1000,
+            delay: 2000,
+            alpha: .8,
+            repeat: -1,
+            yoyo: true
+        });
+
+    }
+
+    _logo() {
+
+        let logoImage = this.add.image(this.sys.canvas.width / 2, -500, logo);
+        logoImage.setScale(1);
         logoImage.setOrigin(0.5);
 
         this.tweens.add({
@@ -52,31 +86,28 @@ export default class LaunchScene extends Phaser.Scene {
             repeat: -1,
             repeatDelay: 2000,
             delay: 2700,
-            scale: '+=0.2',
+            scale: '+=0.1',
             rotation: -0.05,
-            yoyo: true,
+            yoyo: true
         });
-
-        let spaceToStartText = this.add.text(0, 0, `Press Space to start`, {fontSize: '42px', fontFamily: 'Arial', fontStyle: 'bold', fill: 'white'});
-        spaceToStartText.setShadow(2, 2, 'rgba(0,0,0,0.8)', 2);
-
-        spaceToStartText.setPosition(this.sys.canvas.width / 2, (this.sys.canvas.height / 2) + 350);
-        spaceToStartText.setOrigin(0.5);
+        this.tweens.add({
+            targets: logoImage,
+            ease: 'Quad.easeInOut',
+            duration: 500,
+            repeat: 0,
+            delay: 500,
+            y: (this.sys.canvas.height / 2) + 170
+        });
 
         this.tweens.add({
-            targets: spaceToStartText,
+            targets: logoImage,
             ease: 'Quad.easeInOut',
-            duration: 1000,
-            alpha: 0.2,
-            repeat: -1,
-            yoyo: true,
+            duration: 500,
+            repeat: 0,
+            delay: 1000,
+            y: '-=100'
         });
 
-        this.input.keyboard.on('keydown-SPACE', function() {
-            this.scene.start('main');
-        }, this);
-
     }
-
 
 }

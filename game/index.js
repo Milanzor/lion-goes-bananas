@@ -9,8 +9,6 @@ import ScoreScene from './Scenes/ScoreScene';
 const config = {
 
     type: Phaser.AUTO,
-    width: window.innerWidth,
-    height: window.innerHeight,
     physics: {
         default: 'arcade',
         arcade: {
@@ -18,12 +16,13 @@ const config = {
         }
     },
     scale: {
+        parent: 'lion',
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH,
+        width: 2560,
+        height: 1440
     },
     scene: [LaunchScene, MainScene, ScoreScene],
-    autoCenter: true,
-    backgroundColor: '#C9E9F6'
 };
 
 export default new Phaser.Game(config);
