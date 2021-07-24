@@ -22,7 +22,7 @@ const config = {
         width: 2560,
         height: 1440
     },
-    scene: [LaunchScene, MainScene, ScoreScene],
+    scene: [LaunchScene, MainScene, ScoreScene]
 };
 
 export default new Phaser.Game(config);

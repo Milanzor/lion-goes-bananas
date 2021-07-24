@@ -134,6 +134,19 @@ export default class MainScene extends Phaser.Scene {
         this.jungleDrumMusic = this.sound.add(jungleDrumMusic, {loop: true}).play();
         this.monkeyChest = this.sound.add(monkeyChest, {loop: false, volume: 2});
 
+        this._isMobile = false;
+        this._deviceBeta = 0;
+
+        if (window.DeviceOrientationEvent && 'ontouchstart' in window) {
+
+            this._isMobile = true;
+
+            window.addEventListener('deviceorientation', (event) => {
+                this._deviceBeta = event.beta;
+            });
+
+        }
+
     }
 
     /**
@@ -202,22 +215,33 @@ export default class MainScene extends Phaser.Scene {
      */
     update(time, delta) {
 
-        if (this.cursors.shift.isDown) {
-            this.player.setSpeedSprint();
-        } else {
-            this.player.setSpeedWalk();
-        }
+        if (this._isMobile) {
 
-        if (this.cursors.left.isDown) {
-            this.player.moveLeft();
-        } else if (this.cursors.right.isDown) {
-            this.player.moveRight();
-        } else {
-            this.player.stationary();
-        }
+            if (this._deviceBeta < 0) {
+                this.player.moveLeft();
+            } else {
+                this.player.moveRight();
+            }
 
-        if (this.cursors.up.isDown && this.player.isNotJumpingOrFalling()) {
-            this.player.jump();
+        } else {
+
+            if (this.cursors.shift.isDown) {
+                this.player.setSpeedSprint();
+            } else {
+                this.player.setSpeedWalk();
+            }
+
+            if (this.cursors.left.isDown) {
+                this.player.moveLeft();
+            } else if (this.cursors.right.isDown) {
+                this.player.moveRight();
+            } else {
+                this.player.stationary();
+            }
+
+            if (this.cursors.up.isDown && this.player.isNotJumpingOrFalling()) {
+                this.player.jump();
+            }
         }
     }
 

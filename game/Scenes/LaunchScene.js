@@ -47,6 +47,10 @@ export default class LaunchScene extends Phaser.Scene {
         this.input.keyboard.on('keydown-SPACE', function() {
             this.scene.start('main');
         }, this);
+        
+        this.input.on('pointerup', function() {
+            this.scene.start('main');
+        }, this);
 
     }
 

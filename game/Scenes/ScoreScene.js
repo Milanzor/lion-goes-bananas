@@ -38,7 +38,7 @@ export default class ScoreScene extends Phaser.Scene {
         scoreText.setResolution(2);
 
         let continueText = this.add.text(0, 0, `Press Space to restart`, {fontSize: '42px', fontFamily: 'Arial', fontStyle: 'bold', fill: 'white'});
-        continueText.setShadow(5, 5, 'rgba(0,0,0,1)', 2);
+        continueText.setShadow(3, 3, 'rgba(0,0,0,1)', 2);
         continueText.setResolution(2);
 
         continueText.setPosition(this.sys.canvas.width / 2, (this.sys.canvas.height / 2) + 70);
@@ -48,6 +48,10 @@ export default class ScoreScene extends Phaser.Scene {
             this.scene.start('main');
         }, this);
 
+        this.input.on('pointerup', function() {
+            this.scene.start('main');
+        }, this);
+        
         this.game.sound.stopAll();
 
         let gameoverSound = this.sound.add(gameover, {loop: false});
