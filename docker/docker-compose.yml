@@ -1,0 +1,10 @@
+---
+version: "2"
+services:
+  lion-goes-bananas:
+    build: .
+    volumes:
+      - ../public:/opt/webroot
+    ports:
+      - 7331:3000
+    restart: unless-stopped

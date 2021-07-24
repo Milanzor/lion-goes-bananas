@@ -26,7 +26,8 @@ module.exports = {
         host: '0.0.0.0',
         hot: true,
         port: 1337,
-        allowedHosts: ['192.168.2.101', 'lion-goes-bananas.roach.one', 'localhost', '127.0.0.1']
+        writeToDisk: true,
+        allowedHosts: ['192.168.2.101', 'lionoe-goes-bananas.roach.one', 'lion-goes-bananas.roach.one', 'localhost', '127.0.0.1']
     },
 
     // Optimization
