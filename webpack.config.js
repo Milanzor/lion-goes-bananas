@@ -9,7 +9,7 @@ const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 // Css plugin
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
-let publicDir = './public';
+let publicDir = './docs';
 
 module.exports = {
 
